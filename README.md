@@ -22,9 +22,8 @@ This app demonstrates **Clean Architecture**, **MVVM design pattern**, and moder
 ## 🚀 Features
 
 - Fetches and displays the most popular NYT articles
-- Uses modern SwiftUI with reactive Combine pipelines
+- Uses modern SwiftUI with reactive Combine
 - Implements clear separation of concerns using Clean Architecture
-- Unit tested with XCTest
-- Safe and configurable environment via `plist`
+- Unit tested
 
 
