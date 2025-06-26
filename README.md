@@ -1,7 +1,7 @@
 # 📰 NYT Articles - iOS App (SwiftUI + Clean Architecture)
 
 A modern iOS application built with **SwiftUI** that displays the most popular articles from **The New York Times**.  
-This app demonstrates **Clean Architecture**, **MVVM design pattern**, and modern iOS development **best practices**.
+This app demonstrates **Clean Architecture**, **MVVM design pattern**, and modern iOS development.
 
 
 ## 🧱 Architecture Overview
