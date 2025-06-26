@@ -14,7 +14,7 @@ This app demonstrates **Clean Architecture**, **MVVM design pattern**, and moder
 │ └── Use Cases (Business Logic)
 │
 └── Data Layer
-├── Repositories (Protocol)
+├── Repositories
 └── Data Sources
 ├── Remote
 └── Local
