@@ -10,7 +10,7 @@ This app demonstrates **Clean Architecture**, **MVVM design pattern**, and moder
 │ ├── SwiftUI Views
 │ └── ViewModels (MVVM)
 │
-├── Business Layer
+├── Domain Layer
 │ └── Use Cases (Business Logic)
 │
 └── Data Layer
