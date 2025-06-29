@@ -11,7 +11,7 @@ import SwiftUI
 struct ArticalesAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ArticalesConfigurator.configureModule()
+            ArticlesModule.build()
         }
     }
 }

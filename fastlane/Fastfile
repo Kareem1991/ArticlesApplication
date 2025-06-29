@@ -1,0 +1,26 @@
+fastlane_version "2.200.0"
+default_platform(:ios)
+
+platform :ios do
+  desc "Build debug version"
+  lane :build_debug do
+    puts "Building ArticalesApp (Debug)..."
+    sh("cd .. && xcodebuild -project ArticalesApp.xcodeproj -scheme ArticalesApp -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 16 Pro' build")
+    puts "Debug build completed!"
+  end
+
+  desc "Run tests"
+  lane :test do
+    puts "Running tests..."
+    sh("cd .. && xcodebuild test -project ArticalesApp.xcodeproj -scheme ArticalesApp -destination 'platform=iOS Simulator,name=iPhone 16 Pro'")
+    puts "Tests completed!"
+  end
+
+  desc "Build and test"
+  lane :build_and_test do
+    puts "Running complete pipeline..."
+    test
+    build_debug
+    puts "Pipeline completed!"
+  end
+end

@@ -1,0 +1,112 @@
+# This is the Fastfile which defines all available lanes and actions.
+# More information about this file: https://docs.fastlane.tools
+
+fastlane_version "2.200.0"
+default_platform(:ios)
+
+platform :ios do
+
+  desc "🔨 Build debug version"
+  lane :build_debug do
+    puts "🔨 Building ArticlesApp (Debug)..."
+    
+    begin
+      # Try to build with xcodebuild directly
+      sh("cd .. && xcodebuild -project ArticlesApp.xcodeproj -scheme ArticlesApp -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 15 Pro' build")
+      puts "✅ Debug build completed!"
+    rescue => ex
+      puts "❌ Build failed: #{ex}"
+      # Try alternative approach
+      puts "🔄 Trying alternative build method..."
+      sh("cd .. && xcodebuild -project ArticlesApp.xcodeproj -scheme ArticlesApp -configuration Debug build")
+      puts "✅ Debug build completed (alternative method)!"
+    end
+  end
+
+  desc "📱 Build release version"
+  lane :build_release do
+    puts "📱 Building ArticlesApp (Release)..."
+    
+    begin
+      sh("cd .. && xcodebuild -project ArticlesApp.xcodeproj -scheme ArticlesApp -configuration Release -destination 'platform=iOS Simulator,name=iPhone 15 Pro' build")
+      puts "✅ Release build completed!"
+    rescue => ex
+      puts "❌ Build failed: #{ex}"
+      puts "🔄 Trying alternative build method..."
+      sh("cd .. && xcodebuild -project ArticlesApp.xcodeproj -scheme ArticlesApp -configuration Release build")
+      puts "✅ Release build completed (alternative method)!"
+    end
+  end
+
+  desc "🧪 Run tests"
+  lane :test do
+    puts "🧪 Running tests..."
+    
+    begin
+      sh("cd .. && xcodebuild test -project ArticlesApp.xcodeproj -scheme ArticlesApp -destination 'platform=iOS Simulator,name=iPhone 15 Pro'")
+      puts "✅ Tests completed!"
+    rescue => ex
+      puts "❌ Tests failed: #{ex}"
+      puts "🔄 Trying to run tests with different simulator..."
+      sh("cd .. && xcodebuild test -project ArticlesApp.xcodeproj -scheme ArticlesApp -destination 'platform=iOS Simulator,name=iPhone 14'")
+      puts "✅ Tests completed (iPhone 14)!"
+    end
+  end
+
+  desc "🚀 Build and test"
+  lane :build_and_test do
+    puts "🚀 Building and testing ArticlesApp..."
+    
+    # Clean first
+    clean
+    
+    # Run tests
+    test
+    
+    # Build debug
+    build_debug
+    
+    puts "✅ Build and test pipeline completed!"
+  end
+
+  desc "🧹 Clean project"
+  lane :clean do
+    puts "🧹 Cleaning project..."
+    sh("cd .. && xcodebuild clean -project ArticlesApp.xcodeproj -scheme ArticlesApp")
+    puts "✅ Project cleaned!"
+  end
+
+  desc "📋 Show available lanes"
+  lane :help do
+    puts "Available commands:"
+    puts "  fastlane ios build_debug   - Build debug version"
+    puts "  fastlane ios build_release - Build release version"
+    puts "  fastlane ios test         - Run unit tests"
+    puts "  fastlane ios build_and_test - Run complete pipeline"
+    puts "  fastlane ios clean        - Clean project"
+  end
+
+end
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Generate new localized screenshots"
+  lane :screenshots do
+    capture_screenshots(scheme: "ArticalesApp")
+  end
+end
